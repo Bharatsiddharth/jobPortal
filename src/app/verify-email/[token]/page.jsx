@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import api from "@/app/services/api";
+import Link from "next/link";
 
 const VerifyEmail = () => {
   const { token } = useParams();  // Get the token from the URL params
