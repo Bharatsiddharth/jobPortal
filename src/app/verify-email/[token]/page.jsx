@@ -38,19 +38,20 @@ const VerifyEmail = () => {
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
-      <div className="p-6 bg-white shadow-lg rounded-lg">
-        <h1 className="text-2xl font-bold text-blue-600">Email Verification</h1>
-        <p className="mt-4 text-gray-700">{status}</p>
-        {isVerified && (
-          <Link
-            href="/auth/login"
-            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-          >
-            Go to Login
-          </Link>
-        )}
-      </div>
+    <div className="p-6 bg-white shadow-lg rounded-lg max-w-md w-full">
+      <h1 className="text-3xl font-semibold text-blue-600">Email Verification</h1>
+      <p className="mt-4 text-lg text-gray-700">{status}</p>
+      {isVerified && (
+        <Link
+          href="/auth/login"
+          className="mt-6 inline-block w-full py-3 text-center text-white bg-blue-600 rounded-lg transform transition duration-300 hover:bg-blue-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        >
+          Go to Login
+        </Link>
+      )}
     </div>
+  </div>
+  
   );
 };
 
