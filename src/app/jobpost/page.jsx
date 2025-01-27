@@ -50,8 +50,8 @@ const JobForm = () => {
   return (
     <div>
 <Navbar/>
-<form onSubmit={handleSubmit} className="max-w-lg mx-auto p-4 mt-10 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">Post a Job</h2>
+<form onSubmit={handleSubmit} className="max-w-lg mx-auto p-4 pt-20 bg-white shadow-md rounded-lg">
+      <h2 className="text-2xl font-bold mb-4 pt-10">Post a Job</h2>
       <div className="mb-4">
         <label className="block text-gray-700">Job Title</label>
         <input

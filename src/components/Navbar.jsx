@@ -14,7 +14,7 @@ const Navbar = () => {
   const isActive = (path) => pathname === path; // Check if the path matches the current pathname
 
   return (
-    <nav className="bg-gray-100 text-gray-700 shadow-md">
+    <nav className="bg-gray-100 text-gray-700 shadow-md fixed w-full ">
       <div className="container mx-auto px-4 flex items-center justify-between h-16">
         {/* Logo */}
         <div className="text-2xl font-bold flex items-center">
