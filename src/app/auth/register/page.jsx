@@ -1,15 +1,16 @@
 "use client";
 import { useState } from "react";
 import { toast } from "react-toastify";
-
-import { redirect } from "next/navigation"; // Import redirect
 import api from "@/app/services/api";
+import { redirect } from "next/navigation";
 
 const RegisterPage = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [loading, setLoading] = useState(false); // Loading state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when the form is being submitted
 
     try {
       const response = await api.post("/api/companies/register", form);
@@ -25,12 +26,14 @@ const RegisterPage = () => {
       setForm({ name: "", email: "", password: "" });
 
       // Redirect to login page after successful registration
-      redirect("/auth/login"); // Redirect to the login page
+      window.location.href = "/auth/login";
     } catch (error) {
       // Log error details for debugging
       console.error("Registration error:", error); // Log the error object
       const errorMessage = error.response?.data?.message || error.message || "Registration failed. Please try again.";
       toast.error(errorMessage); // Display the error message
+    } finally {
+      setLoading(false); // Set loading to false after the process is done
     }
   };
 
@@ -67,9 +70,14 @@ const RegisterPage = () => {
         />
         <button
           type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className={`w-full ${loading ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'} text-white font-bold py-2 px-4 rounded`}
+          disabled={loading} // Disable button while loading
         >
-          Register
+          {loading ? (
+            <span>Loading...</span>
+          ) : (
+            "Register"
+          )}
         </button>
       </form>
     </div>
