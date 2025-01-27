@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import api from "@/app/services/api";
+import Navbar from "../../components/Navbar";
 
 const JobsPage = () => {
   const [jobs, setJobs] = useState([]); // State to store jobs
@@ -42,6 +43,8 @@ const JobsPage = () => {
   }
 
   return (
+   <>
+   <Navbar/>
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6">Job Listings</h1>
       {jobs.length === 0 ? (
@@ -86,6 +89,7 @@ const JobsPage = () => {
         </div>
       )}
     </div>
+   </>
   );
 };
 

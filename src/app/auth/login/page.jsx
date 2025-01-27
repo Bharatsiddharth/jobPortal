@@ -1,13 +1,13 @@
 "use client";
 import { useState } from "react";
 import { toast } from "react-toastify";
-
-import { redirect } from "next/navigation"; // Import redirect for navigation
-import { useAuth } from "@/app/contexts/authContext";
+import { useRouter } from "next/navigation"; // Use useRouter for navigation
+import { useAuth } from "../../contexts/authContext";
 import api from "@/app/services/api";
 
 const LoginPage = () => {
   const { login } = useAuth();
+  const router = useRouter();
   const [form, setForm] = useState({ email: "", password: "" });
 
   const handleSubmit = async (e) => {
@@ -16,17 +16,16 @@ const LoginPage = () => {
       const { data } = await api.post("/api/companies/login", form);
 
       if (data && data.token) {
-        login(data.token); // Store token in the AuthContext
+        login(data.token, { email: form.email }); // Store token and optional user data
         toast.success("Logged in successfully!");
 
         // Redirect to the homepage
-        redirect("/"); 
+        router.push("/");
       } else {
         toast.error("No token received. Login failed.");
       }
     } catch (error) {
       console.error("Login error:", error); // Log the error to the console
-      // Provide more specific error feedback
       const errorMessage =
         error.response?.data?.message ||
         error.message ||

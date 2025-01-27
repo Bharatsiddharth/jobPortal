@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/app/services/api';
 import { useAuth } from '../contexts/authContext';
+import Navbar from '@/components/Navbar';
 
 const JobForm = () => {
   const { user } = useAuth();  // Get the user state from the AuthContext
@@ -13,12 +14,7 @@ const JobForm = () => {
   const [endDate, setEndDate] = useState('');
   const [candidateEmails, setCandidateEmails] = useState('');
 
-  useEffect(() => {
-    if (!user) {
-      // If the user is not logged in, redirect to the login page
-      router.push('/auth/login');
-    }
-  }, [user, router]); // Redirect to login if user is not logged in
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,7 +48,9 @@ const JobForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-4 bg-white shadow-md rounded-lg">
+    <div>
+<Navbar/>
+<form onSubmit={handleSubmit} className="max-w-lg mx-auto p-4 mt-10 bg-white shadow-md rounded-lg">
       <h2 className="text-2xl font-bold mb-4">Post a Job</h2>
       <div className="mb-4">
         <label className="block text-gray-700">Job Title</label>
@@ -111,6 +109,7 @@ const JobForm = () => {
         Post Job
       </button>
     </form>
+    </div>
   );
 };
 

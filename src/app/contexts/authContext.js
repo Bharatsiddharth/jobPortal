@@ -1,7 +1,6 @@
-"use client"; 
+"use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
-import Cookies from "js-cookie";
 
 // Create the AuthContext
 const AuthContext = createContext();
@@ -11,22 +10,26 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Check for token in cookies on mount
-    const token = Cookies.get("token");
+    // Check for token in localStorage on mount
+    const token = localStorage.getItem("token");
     if (token) {
       setUser({ token }); // Optionally decode the token to extract user data
     }
   }, []);
 
-  // Login function (you can implement the actual logic based on your app)
-  const login = (credentials) => {
-    setUser(credentials); // After successful login, set user data
+  // Login function to save the token in localStorage and set user state
+  const login = (token, userData) => {
+    // Save token in localStorage
+    localStorage.setItem("token", token);
+
+    // Set user data (optional)
+    setUser(userData || { token }); // You can use `userData` from the login API if needed
   };
 
   // Logout function to clear user data and token
   const logout = () => {
-    Cookies.remove("token");
-    setUser(null);
+    localStorage.removeItem("token"); // Remove the token from localStorage
+    setUser(null); // Clear user state
   };
 
   return (
