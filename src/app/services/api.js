@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const api = axios.create({
-  baseURL: "https://jobportalbackend-vwx4.onrender.com/",
+  baseURL: "https://jobportalbackend-vwx4.onrender.com",
   withCredentials: true, // For handling cookies
 });
 
